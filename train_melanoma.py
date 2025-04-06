@@ -114,7 +114,7 @@ def predict_image(img_path, model, transform, class_names):
         print(f"Predicted class: {predicted_class}")
 
 # 🔍 Test a sample image
-test_image_path = './melanoma_cancer_dataset/test/benign/1.jpg'  # Change this path as needed
+test_image_path = './melanoma_cancer_dataset/test/benign/melanoma_10000.jpg'  # Change this path as needed
 predict_image(test_image_path, model, transform, train_dataset.classes)
 
 # ===========================
