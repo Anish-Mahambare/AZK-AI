@@ -34,6 +34,8 @@ pip install flask onnxruntime pillow torchvision numpy
 .
 ├── app.py               # Main Flask application
 ├── melanoma_classifier.onnx  # Pretrained ONNX model
+├── old-programs/
+│   └── xxxx       # python training files for model
 ├── templates/
 │   └── index.html       # HTML template for file upload
 └── README.md            # You're reading it!
