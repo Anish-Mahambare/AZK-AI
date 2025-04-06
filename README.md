@@ -66,14 +66,3 @@ python app.py
 
 This tool is intended for **demonstration purposes only** and should **not be used for medical diagnosis**. Always consult with a healthcare professional.
 
-## 📸 Example
-
-> Upload an image like this:  
-> *(insert a screenshot of the interface and prediction result here)*
-
-## 📄 License
-
-MIT License. Feel free to use and modify.
-```
-
-Let me know if you want a version with sample images, styling suggestions for `index.html`, or Docker support!
