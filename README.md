@@ -1,3 +1,5 @@
 # AZK-AI
 
-A Neural Network that indetinfies between belingent and malicious cancer images 
+A model that indetinfies between belingent and malicious cancer images 
+
+more tbd
