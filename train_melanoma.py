@@ -5,6 +5,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms, models
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
+from torchvision.models import ResNet18_Weights
 
 # ===========================
 # 1. Dataset Paths & Settings
@@ -53,7 +54,8 @@ def show_batch(loader, dataset):
 # ===========================
 # 5. Load & Modify ResNet18
 # ===========================
-model = models.resnet18(pretrained=True)
+
+model = models.resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)  # Use weights argument instead of pretrained
 num_features = model.fc.in_features
 model.fc = nn.Linear(num_features, 2)  # 2 classes: benign & malignant
 model = model.to(device)
@@ -116,19 +118,21 @@ test_image_path = './melanoma_cancer_dataset/test/benign/1.jpg'  # Change this p
 predict_image(test_image_path, model, transform, train_dataset.classes)
 
 # ===========================
-# 10. Export to ONNX
+# 10. Export to ONNX & save
 # ===========================
-# dummy_input = torch.randn(1, 3, 224, 224).to(device)
-# onnx_path = "melanoma_classifier.onnx"
-# torch.onnx.export(
-#    model,
-#    dummy_input,
-#    onnx_path,
-#    export_params=True,
-#    opset_version=11,
-#    input_names=["input"],
-#    output_names=["output"],
-#    dynamic_axes={"input": {0: "batch_size"}, "output": {0: "batch_size"}}
-#)
-#print(f"ONNX model saved to: {onnx_path}")
+torch.save(model.state_dict(), 'melanoma_classifier.pth')
+
+dummy_input = torch.randn(1, 3, 224, 224).to(device)
+onnx_path = "melanoma_classifier.onnx"
+torch.onnx.export(
+    model,
+    dummy_input,
+    onnx_path,
+    export_params=True,
+    opset_version=11,
+    input_names=["input"],
+    output_names=["output"],
+    dynamic_axes={"input": {0: "batch_size"}, "output": {0: "batch_size"}}
+)
+print(f"ONNX model saved to: {onnx_path}")
 
