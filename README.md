@@ -1,6 +1,3 @@
-Sure! Here's a complete `README.md` file in proper GitHub Markdown format for your Flask-based melanoma classifier app using an ONNX model:
-
-
 # 🧬 Melanoma Classifier Web App
 
 A simple Flask web application for classifying skin lesions as **Benign** or **Malignant** using a pre-trained ONNX model.
