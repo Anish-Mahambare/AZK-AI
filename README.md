@@ -23,7 +23,7 @@ Clone the repository to run the project.
 ```bash
 git clone https://github.com/Anish-Mahambare/AZK-AI.git
 ```
-Then, navigate into the to the directory
+Then, navigate into the to the directory.
 
 ```bash
 cd AZK-AI
@@ -38,9 +38,9 @@ pip install flask onnxruntime pillow torchvision numpy
 ## 📂 Project Structure
 
 ```
-.
+./
 ├── app.py               # Main Flask application
-├── melanoma_classifier.onnx  # Pretrained ONNX model
+├── melanoma_classifier_50.onnx  # Pretrained ONNX model
 ├── old-programs/
 │   └── xxxx       # python training files for model
 ├── templates/
@@ -61,15 +61,14 @@ pip install flask onnxruntime pillow torchvision numpy
 
 ## 💻 Running the App
 
-1. Clone this repo or copy the files to your machine.
-2. Make sure your environment is set up with the dependencies above.
-3. Run the Flask app:
+1. Make sure your environment is set up with the dependencies above.
+2. Run the Flask app:
 
 ```bash
 python app.py
 ```
 
-4. Open your browser and go to [http://localhost:5000](http://localhost:5000)
+3. Open your browser and go to [http://localhost:5000](http://localhost:5000)
 
 ## 🔒 Disclaimer
 
