@@ -7,35 +7,24 @@ from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 from torchvision.models import ResNet18_Weights
 
-# ===========================
-# 1. Dataset Paths & Settings
-# ===========================
 BASE_DIR = './melanoma_cancer_dataset'  # Update if needed
 TRAIN_DIR = os.path.join(BASE_DIR, 'train')
 TEST_DIR = os.path.join(BASE_DIR, 'test')
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# ===========================
-# 2. Image Transformations
-# ===========================
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize([0.5], [0.5])
 ])
 
-# ===========================
-# 3. Load Dataset & DataLoader
-# ===========================
+
 train_dataset = datasets.ImageFolder(TRAIN_DIR, transform=transform)
 test_dataset = datasets.ImageFolder(TEST_DIR, transform=transform)
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 print(f"Classes: {train_dataset.classes}")  # ['benign', 'malignant']
 
-# ===========================
-# 4. Visualize Sample Images
-# ===========================
 def show_batch(loader, dataset):
     images, labels = next(iter(loader))
     plt.figure(figsize=(10, 8))
@@ -48,27 +37,15 @@ def show_batch(loader, dataset):
         plt.axis('off')
     plt.show()
 
-# Uncomment to preview a batch:
-# show_batch(train_loader, train_dataset)
 
-# ===========================
-# 5. Load & Modify ResNet18
-# ===========================
-
-model = models.resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)  # Use weights argument instead of pretrained
+model = models.resnet18(weights=ResNet18_Weights.IMAGENET1K_V1) 
 num_features = model.fc.in_features
-model.fc = nn.Linear(num_features, 2)  # 2 classes: benign & malignant
+model.fc = nn.Linear(num_features, 2)  
 model = model.to(device)
 
-# ===========================
-# 6. Loss & Optimizer
-# ===========================
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-# ===========================
-# 7. Training Loop
-# ===========================
 EPOCHS = 50
 for epoch in range(EPOCHS):
     model.train()
@@ -83,9 +60,6 @@ for epoch in range(EPOCHS):
         running_loss += loss.item()
     print(f"Epoch [{epoch+1}/{EPOCHS}], Loss: {running_loss/len(train_loader):.4f}")
 
-# ===========================
-# 8. Evaluation
-# ===========================
 model.eval()
 correct = 0
 total = 0
@@ -98,9 +72,6 @@ with torch.no_grad():
         correct += (predicted == labels).sum().item()
 print(f"Test Accuracy: {100 * correct / total:.2f}%")
 
-# ===========================
-# 9. Predict a Single Image
-# ===========================
 from PIL import Image
 
 def predict_image(img_path, model, transform, class_names):
@@ -113,13 +84,10 @@ def predict_image(img_path, model, transform, class_names):
         predicted_class = class_names[predicted.item()]
         print(f"Predicted class: {predicted_class}")
 
-# 🔍 Test a sample image
-test_image_path = './melanoma_cancer_dataset/test/benign/melanoma_10000.jpg'  # Change this path as needed
+
+test_image_path = './melanoma_cancer_dataset/test/benign/melanoma_10000.jpg'  
 predict_image(test_image_path, model, transform, train_dataset.classes)
 
-# ===========================
-# 10. Export to ONNX & save
-# ===========================
 torch.save(model.state_dict(), 'melanoma_classifier_50.pth')
 
 dummy_input = torch.randn(1, 3, 224, 224).to(device)
