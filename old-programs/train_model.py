@@ -69,7 +69,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 # ===========================
 # 7. Training Loop
 # ===========================
-EPOCHS = 5
+EPOCHS = 50
 for epoch in range(EPOCHS):
     model.train()
     running_loss = 0.0
@@ -120,10 +120,10 @@ predict_image(test_image_path, model, transform, train_dataset.classes)
 # ===========================
 # 10. Export to ONNX & save
 # ===========================
-torch.save(model.state_dict(), 'melanoma_classifier.pth')
+torch.save(model.state_dict(), 'melanoma_classifier_50.pth')
 
 dummy_input = torch.randn(1, 3, 224, 224).to(device)
-onnx_path = "melanoma_classifier.onnx"
+onnx_path = "melanoma_classifier_50.onnx"
 torch.onnx.export(
     model,
     dummy_input,

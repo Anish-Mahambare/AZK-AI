@@ -10,7 +10,7 @@ from PIL import Image
 # ===========================
 # 1. Load ONNX Model
 # ===========================
-onnx_path = 'melanoma_classifier.onnx'  # Path to the saved ONNX model
+onnx_path = 'melanoma_classifier_50.onnx'  # Path to the saved ONNX model
 session = ort.InferenceSession(onnx_path)
 
 # ===========================

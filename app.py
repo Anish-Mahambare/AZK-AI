@@ -9,7 +9,7 @@ from torchvision import transforms
 app = Flask(__name__)
 
 # Load ONNX model
-onnx_path = 'melanoma_classifier.onnx'  # Path to your ONNX model
+onnx_path = 'melanoma_classifier_50.onnx'  # Path to your ONNX model
 session = ort.InferenceSession(onnx_path)
 
 # Image transformation for the model
