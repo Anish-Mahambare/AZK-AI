@@ -18,6 +18,16 @@ This app uses an ONNX model named `melanoma_classifier.onnx` trained for binary 
 The model expects input images resized to 224x224 and normalized accordingly.
 
 ## 🛠️ Requirements
+Clone the repository to run the project. 
+
+```bash
+git clone https://github.com/Anish-Mahambare/AZK-AI.git
+```
+Then, navigate into the to the directory
+
+```bash
+cd AZK-AI
+```
 
 Make sure you have the following Python packages installed:
 
